@@ -45,8 +45,10 @@ func noFoodMove(delta):
 	#move_and_collide(Vector2(0, -1*speed))
 	
 	#Sinusoidal Motion
-	move_and_collide(Vector2(0, -speed*sin(t/T)))
+	move_and_collide(Vector2(0, speed*sin(t/T)))
 	t+=delta
+	
+	#print(t, " ", T, sin(t/T))
 	
 func FoodMove():
 	
