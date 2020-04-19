@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -45,7 +44,7 @@ func noFoodMove(delta):
 	#move_and_collide(Vector2(0, -1*speed))
 	
 	#Sinusoidal Motion
-	move_and_collide(Vector2(0, speed*sin(t/T)))
+	move_and_collide(Vector2(0, speed*cos(t/T)))
 	t+=delta
 	
 	#print(t, " ", T, sin(t/T))
