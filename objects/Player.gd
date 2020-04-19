@@ -5,8 +5,8 @@ extends KinematicBody2D
 # var b = "text"
 
 #Initial
-var startX = 100
-var startY = 300
+var startX = 80
+var startY = 270
 
 #Motion Rules
 #var disp = 0
@@ -81,12 +81,13 @@ func FoodMove(delta):
 		
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#self.set_position(Vector2(startX,startY))
+	self.set_position(Vector2(startX,startY))
 	pass # Replace with function body.
 
 func _physics_process(delta):
 	seekFood(delta)
 	#print(disp)
+	#print(self.get_position())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -94,7 +95,7 @@ func _process(delta):
 
 func _on_Hitbox_body_entered(body) -> void:
 	if (body.is_in_group("Food")):
-		print(body)
+		#print(body)
 		body.queue_free()
 	pass # Replace with function body.
 
