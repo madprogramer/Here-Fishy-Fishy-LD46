@@ -75,6 +75,8 @@ func FoodMove():
 	move_and_collide(Vector2(0, moveY*speed))
 	#disp+=moveY*speed
 
+
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#self.set_position(Vector2(startX,startY))
@@ -90,5 +92,7 @@ func _process(delta):
 
 func _on_Hitbox_body_entered(body) -> void:
 	if (body.is_in_group("Food")):
-		print("HEYO")
+		print(body)
+		body.queue_free()
 	pass # Replace with function body.
+
