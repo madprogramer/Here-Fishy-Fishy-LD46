@@ -20,7 +20,7 @@ var T = 0.125*3.14
 func seekFood(delta):
 	if (.get_parent().get_tree().get_nodes_in_group("Food")).size() != 0 :
 		t = 0
-		FoodMove()
+		FoodMove(delta)
 	else:
 		noFoodMove(delta)
 
@@ -49,7 +49,7 @@ func noFoodMove(delta):
 	
 	#print(t, " ", T, sin(t/T))
 	
-func FoodMove():
+func FoodMove(delta):
 	
 	#Target the left-most
 	
@@ -57,23 +57,25 @@ func FoodMove():
 	var Y = 999999
 	
 	for child in .get_parent().get_tree().get_nodes_in_group("Food"):
-		if X > child.global_position.x:
+		if X > child.global_position.x and child.global_position.x > self.global_position.x:
 			X = child.global_position.x
 			Y = child.global_position.y
 		#print(X, " ", Y)
 	#print(X, " ", Y)
 	#print("DONE")
-	
-	#TAKE ARCTAN
-	#TAKE COS OF ARCTAN
-	
-	#print(Y," ",global_position.y)
-	#var moveY = sign(Y-global_position.y)
-	var moveY = ( sin( atan((global_position.y-Y )/(global_position.x-X)) ))
-	#print(sin(-atan((global_position.y-Y )/(global_position.x-X))))
-	#print(moveY*speed)
-	move_and_collide(Vector2(0, moveY*speed))
-	#disp+=moveY*speed
+	if X == 999999 and Y ==999999:
+		noFoodMove(delta)
+	else:
+		#TAKE ARCTAN
+		#TAKE COS OF ARCTAN
+		
+		#print(Y," ",global_position.y)
+		var moveY = sign(Y-global_position.y)
+		#var moveY = ( sin( atan((global_position.y-Y )/(global_position.x-X)) ))
+		#print(sin(-atan((global_position.y-Y )/(global_position.x-X))))
+		#print(moveY*speed)
+		move_and_collide(Vector2(0, moveY*speed))
+		#disp+=moveY*speed
 
 
 		
