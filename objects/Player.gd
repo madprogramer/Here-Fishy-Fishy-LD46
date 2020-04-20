@@ -97,6 +97,7 @@ func _on_Hitbox_body_entered(body) -> void:
 	if body.is_in_group("Food"):
 		#print("FOOD")
 		body.queue_free()
+		$Nibble.play()
 	elif body.is_in_group("Enemy"):
 		.get_parent().screenShake()
 		.get_parent().State = "GameOver"

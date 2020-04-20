@@ -17,6 +17,7 @@ func clickToSpawnPellet(event):
 	var p = pellet.instance()
 	p.set_position(Vector2(get_global_mouse_position().x,-16))
 	.get_parent().add_child(p)
+	$AudioStreamPlayer2D.play()
 		
 func _input(event):
 	if event.is_action_pressed('click'):
@@ -33,6 +34,7 @@ func _input(event):
 				$Tutorial5.visible=false
 				$Score.visible=true
 				advancePart()
+				.get_parent().State = "Gameplay"
 			else:
 				clickToSpawnPellet(event)
 		elif getState() == "Gameplay":

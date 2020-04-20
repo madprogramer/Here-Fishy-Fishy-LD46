@@ -2,7 +2,7 @@ extends Node
 
 onready var ENEMY = preload("res://objects/Enemy.tscn")
 
-var State = "Gameplay"
+var State = "Tutorial"
 #Tutorial
 #Gameplay
 #GameOver
@@ -11,11 +11,13 @@ var Part = 1
 var SCORE = 0
 var NEXTIN = 4
 var REM = 0
+var deathPlayed = false
 
 func reset():
 	SCORE = 0
 	NEXTIN = 4
 	REM = 0
+	deathPlayed =false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,5 +61,7 @@ func _process(delta):
 		
 	elif State == "GameOver":
 		$Control/GameOver/FinalScore.text = "Final Score: %s"%(floor(SCORE*100))
-	
+		if not deathPlayed:
+			deathPlayed =true
+			$DEATHSOUND.play()
 
