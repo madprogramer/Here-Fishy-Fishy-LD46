@@ -70,7 +70,7 @@ func FoodMove(delta):
 		#TAKE COS OF ARCTAN
 		
 		#print(Y," ",global_position.y)
-		var moveY = sign(Y-global_position.y)
+		var moveY = sign( (Y - (global_position.y)) )
 		#var moveY = ( sin( atan((global_position.y-Y )/(global_position.x-X)) ))
 		#print(sin(-atan((global_position.y-Y )/(global_position.x-X))))
 		#print(moveY*speed)
@@ -94,8 +94,18 @@ func _process(delta):
 	pass
 
 func _on_Hitbox_body_entered(body) -> void:
-	if (body.is_in_group("Food")):
-		#print(body)
+	if body.is_in_group("Food"):
+		#print("FOOD")
 		body.queue_free()
+	elif body.is_in_group("Enemy"):
+		.get_parent().screenShake()
+		.get_parent().State = "GameOver"
+		.get_parent().get_node("Control/Score").visible = false
+		.get_parent().get_node("Control/GameOver").visible = true
+		for FISH in .get_parent().get_tree().get_nodes_in_group("Enemy"):
+			FISH.queue_free()
+		for FOOD in .get_parent().get_tree().get_nodes_in_group("Food"):
+			FOOD.queue_free()
+		queue_free()
 	pass # Replace with function body.
 

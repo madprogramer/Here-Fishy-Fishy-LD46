@@ -1,6 +1,7 @@
 extends Control
 
 onready var pellet = preload("res://objects/Food.tscn")
+onready var PLAYER = preload("res://objects/Player.tscn")
 
 
 func getState():
@@ -36,6 +37,14 @@ func _input(event):
 				clickToSpawnPellet(event)
 		elif getState() == "Gameplay":
 			clickToSpawnPellet(event)
+		elif getState() == "GameOver":
+			.get_parent().State = "Gameplay"
+			.get_parent().screenShake()
+			$GameOver.visible=false
+			$Score.visible=true
+			var P = PLAYER.instance()
+			.get_parent().add_child(P)
+			.get_parent().reset()
 			
 
 # Called when the node enters the scene tree for the first time.
